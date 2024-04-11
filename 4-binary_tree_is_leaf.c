@@ -1,34 +1,21 @@
 #include "binary_trees.h"
 
 /**
-* binary_tree_node - Crée un nouveau nœud pour un arbre binaire
-* @parent: Pointeur vers le nœud parent
-* @value: Valeur à stocker dans le nouveau nœud
+* binary_tree_is_leaf - Vérifie si un nœud est une feuille
+* @node: Pointeur vers le nœud à vérifier
 *
-* Retourne: Pointeur vers le nouveau nœud, ou NULL en cas d'échec
+* Return: 1 si le nœud est une feuille, sinon 0. Si node est NULL, retourne 0
 */
-binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
+int binary_tree_is_leaf(const binary_tree_t *node)
 {
-	/* Alloue de la mémoire pour le nouveau nœud */
-	binary_tree_t *newNode = malloc(sizeof(binary_tree_t));
+	if (node == NULL) /* Vérifie si le nœud est NULL */
+		return (0);	  /* Retourne 0 car un nœud NULL n'est pas une feuille */
 
-	/* Vérifie si l'allocation de mémoire a réussi */
-	if (newNode == NULL)
-	{
-		/* Si l'allocation a échoué, retourne NULL */
-		return (NULL);
-	}
+	if (node->left == NULL && node->right == NULL)
+	/* Vérifie si le nœud n'a ni fils gauche ni fils droit */
+		return (1);
+	/* Retourne 1 car un nœud sans fils est une feuille */
 
-	/* Définit la valeur du nouveau nœud */
-	newNode->n = value;
-
-	/* Définit le parent du nouveau nœud */
-	newNode->parent = parent;
-
-	/* Initialise les enfants gauche et droit à NULL */
-	newNode->left = NULL;
-	newNode->right = NULL;
-
-	/* Retourne le pointeur vers le nouveau nœud */
-	return (newNode);
+	return (0);
+	/* Si le nœud a des fils, retourne 0 car ce n'est pas une feuille */
 }
